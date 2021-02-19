@@ -93,25 +93,21 @@ class ObjectDetectorLite():
                 str_detect = detect_time.strftime('%Y.%m.%d')
                 start_time= detect_time
                 print(detect_time , LABELS[classes[i]])
-                f.write(str_detect + "," + LABELS[classes[i]] + '\n')
                 payload={'value1':LABELS[classes[i]], 'value2':detect_time}
                 #url= "https://maker.ifttt.com/trigger/Trigger/key/***      ***はiftttのwebhookで作成したkeyを入力する
                 if LABELS[classes[i]] == 'person':  
                     cv2.imwrite("/home/pi/test3/img/person/{}_{}_{}.{}".format(LABELS[classes[i]],(datetime.datetime.fromtimestamp(time.time())),n, '.jpg'), image)
                     subprocess.Popen(pro.split())
-                    try:
-                        #subprocess.Popen(cmd.split())
-                        #response = requests.post(url,data=payload)
-                    except:
-                        pass
-                    #cv2.imwrite("/home/pi/***/{}_{}_{}.{}".format(LABELS[classes[i]],(datetime.datetime.fromtimestamp(time.time())),n, '.jpg'), image)　　***はmountするフォルダの名前を入力する
-                    try:
-                        response = requests.post(url,data=payload)
-                        response.raise_for_status()
-                    except requests.exceptions.RequestException as e:
-                        print("P-Error",e)
-                    else:
-                        print("P-OK")
+#                     try:
+#                         #subprocess.Popen(cmd.split())
+#                     #cv2.imwrite("/home/pi/***/{}_{}_{}.{}".format(LABELS[classes[i]],(datetime.datetime.fromtimestamp(time.time())),n, '.jpg'), image)　　***はmountするフォルダの名前を入力する
+#                     try:
+#                         response = requests.post(url,data=payload)
+#                         response.raise_for_status()
+#                     except requests.exceptions.RequestException as e:
+#                         print("P-Error",e)
+#                     else:
+#                         print("P-OK")
                 else:
                     n += 1
                 sleep(1)
